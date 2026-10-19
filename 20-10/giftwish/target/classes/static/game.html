@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vòng quay 20/10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-flower" viewBox="0 0 24 24"><g fill="#ff8fb3"><ellipse cx="12" cy="6" rx="3.2" ry="4.4"/><ellipse cx="12" cy="6" rx="3.2" ry="4.4" transform="rotate(72 12 12)"/><ellipse cx="12" cy="6" rx="3.2" ry="4.4" transform="rotate(144 12 12)"/><ellipse cx="12" cy="6" rx="3.2" ry="4.4" transform="rotate(216 12 12)"/><ellipse cx="12" cy="6" rx="3.2" ry="4.4" transform="rotate(288 12 12)"/></g><circle cx="12" cy="12" r="3" fill="#ffd45e"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="11" rx="1.5" fill="#d6336c"/><rect x="2" y="7" width="20" height="4.5" rx="1.5" fill="#e8527f"/><rect x="10.8" y="7" width="2.4" height="14" fill="#ffd45e"/><path d="M12 7C9 7 7.5 5.5 8 4.2 8.6 2.6 11 3.6 12 7zM12 7c3 0 4.5-1.5 4-2.8C15.4 2.6 13 3.6 12 7z" fill="#ffd45e"/></symbol>
+  <symbol id="i-ghost" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C7.6 2 4 5.6 4 10v11l2.7-2 2.6 2 2.7-2 2.7 2 2.6-2L20 21V10c0-4.4-3.6-8-8-8z"/><circle cx="9" cy="10" r="1.6" fill="#fff"/><circle cx="15" cy="10" r="1.6" fill="#fff"/></symbol>
+  <symbol id="i-money" viewBox="0 0 24 24"><rect x="1.5" y="5" width="21" height="14" rx="2" fill="#3fa66b"/><rect x="3.5" y="7" width="17" height="10" rx="1" fill="none" stroke="#b9ecd0" stroke-width=".8"/><circle cx="12" cy="12" r="3.2" fill="#b9ecd0"/><text x="12" y="13.6" font-size="4.4" text-anchor="middle" fill="#1f6b43" font-weight="700">₫</text></symbol>
+</svg>
+
+<main class="stage">
+  <a class="back" href="index.html">← Trang chủ</a>
+  <h1>Vòng quay may mắn 20/10</h1>
+  <div class="wheel-wrap">
+    <i class="pointer"></i>
+    <svg id="wheel" viewBox="0 0 400 400" aria-hidden="true"></svg>
+    <div class="hub">20/10</div>
+  </div>
+  <button id="spin" class="spin" type="button">Quay</button>
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+</main>
+
+<div class="ghost" id="ghost">
+  <button class="ghost-btn" id="ghostBtn" type="button" aria-label="Hướng dẫn"><svg width="40" height="40"><use href="#i-ghost"/></svg></button>
+  <button class="ghost-bar" id="ghostBar" type="button">[Hướng dẫn]</button>
+</div>
+
+<dialog id="rules" aria-labelledby="rulesTitle">
+  <h2 id="rulesTitle">Cách chơi</h2>
+  <ul>
+    <li>Bấm nút Quay để quay vòng quay may mắn 20/10.</li>
+    <li>Bạn có thể trúng Bông hoa may mắn, Hộp quà bí mật hoặc Tiền lì xì.</li>
+    <li>Khi trúng thưởng, hãy ghi lời chúc của bạn (tối đa 100 từ).</li>
+    <li>Rê chuột vào nút Send để nhập tên, rồi bấm Send để gửi.</li>
+    <li>Gửi xong, bạn sẽ được đưa về trang chủ.</li>
+  </ul>
+  <form method="dialog"><button class="close">Đã hiểu</button></form>
+</dialog>
+
+<dialog id="prize" aria-labelledby="prizeTitle">
+  <div class="head">
+    <svg class="prize-img" viewBox="0 0 24 24" width="64" height="64" aria-hidden="true"><use id="prizeUse" href="#i-flower"/></svg>
+    <h2 id="prizeTitle"></h2>
+  </div>
+  <p class="prize-msg" id="prizeMsg"></p>
+  <div class="inner">
+    <textarea id="gContent" placeholder="Hãy ghi lời chúc của bạn..." aria-label="Lời chúc của bạn"></textarea>
+    <span class="wcount" id="gCount">0/100 từ</span>
+    <div class="send-area" id="gSendArea">
+      <div class="name-slot"><input id="gName" type="text" maxlength="50" placeholder="Tên bạn" aria-label="Tên người gửi" autocomplete="name"></div>
+      <button id="prizeSend" class="send text" type="button">Send</button>
+    </div>
+  </div>
+  <p id="prizeErr" class="status err" role="alert"></p>
+</dialog>
+<dialog id="special" class="special" aria-label="Lời chúc đặc biệt">
+  <div class="sp-hearts" aria-hidden="true"><i>❤</i><i>❤</i><i>❤</i><i>❤</i><i>❤</i><i>❤</i></div>
+  <form method="dialog"><button class="sp-x" aria-label="Đóng">×</button></form>
+  <img class="sp-media" src="/assets/special-rabbit.png" alt="Lời chúc đặc biệt">
+  <svg class="sp-fallback" viewBox="0 0 24 24" width="120" height="120" aria-hidden="true"><use href="#i-flower"/></svg>
+</dialog>
+<script src="special.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
